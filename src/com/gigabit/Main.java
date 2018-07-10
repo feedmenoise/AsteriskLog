@@ -39,15 +39,9 @@ class Core {
         for (int j = 0; j < iter; j++)  {
             i++;
             String s = reader.readLine();
-            if (s.contains(",t,,,")) {
                 s = s.replace(",t,,,","-");
                 fileWriter.write(s);
                 fileWriter.write(System.lineSeparator());
-            }
-            else {
-                fileWriter.write(s);
-                fileWriter.write(System.lineSeparator());
-            }
         }
         fileWriter.close();
         reader.close();
