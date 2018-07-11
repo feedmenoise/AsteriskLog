@@ -53,10 +53,7 @@ public class Core {
                 } catch (Exception er) {
                     String error = "Error from summaryTimeCounter: " + er + " in line:";
                     log(error);
-                    String problemString = i.getClid() + ";" + i.getSrc() + ";" +  i.getDst()+ ";" + i.getDcontext()+ ";" + i.getChannel()+ ";" + i.getSrcchannel()+ ";" + i.getDstchannel()
-                            + ";" + i.getAction()+ ";" + i.getWhere()+ ";" + i.getStart()+ ";" + i.getAnswer()+ ";" + i.getEnd()+ ";" + i.getDuration()
-                            + ";" + i.getBillsec()+ ";" + i.getStatus()+ ";" + i.getAccountcode()+ ";" + i.getUniqueid()+ ";" + i.getUserfield();
-                    log(problemString);
+                    log(i.toString());
                 }
             }
         }
@@ -72,28 +69,21 @@ public class Core {
         arr[3] = 0; //INTERTELECOM
         for (Log i:arrayList) {
 
-            if (i.getWhere().contains("Dongle") && i.getWhere().contains("VDF") ||
-                    i.getWhere().contains("Dongle") && i.getWhere().contains("Vodafone") ||
-                    i.getWhere().contains("Dongle") && i.getWhere().contains("MTS")){
-                arr[0] += counter(i);
-            }
-            else if (i.getWhere().contains("Dongle") && i.getWhere().contains("KS") ||
-                    i.getWhere().contains("Dongle") && i.getWhere().contains("KYIVSTAR")) {
-                arr[1] += counter(i);
-            }
-
-            else if (i.getWhere().contains("Dongle") && i.getWhere().contains("LIFE")) {
-                arr[2] += counter(i);
-            }
-
-            else if (i.getWhere().contains("SIP/intertelecom")) {
-                arr[3] += counter(i);
-                //System.out.println("Intertelecom minutes: " + i.getDuration() + " from " + i.getUniqueid());
-            }
-
-            else {
-                //System.out.println("STRANNO VRODE VSE NORM DOLZHNO BITCH");
-                //System.out.println(i.getWhere());
+            switch(i.outgoingProvider()){
+                case "MTS":
+                    arr[0] += counter(i);
+                    break;
+                case "KS":
+                    arr[1] += counter(i);
+                    break;
+                case "Life":
+                    arr[2] += counter(i);
+                    break;
+                case "Intertelecom":
+                    arr[3] += counter(i);
+                    break;
+                case "dafaq":
+                    break;
             }
         }
 
@@ -117,7 +107,6 @@ public class Core {
                 if (k.getUniqueid().contains("DOCUM")) {
                     if (k.getUserfield().equals(j) && k.getAccountcode().contains("ANSWERED")){
                         answeredSumm++;
-
                     }
                 }
                 else {

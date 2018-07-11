@@ -195,4 +195,32 @@ public class Log {
         this.uniqueid = uniqueid;
         this.userfield = userfield;
     }
+
+    @Override
+    public String toString(){
+        return this.clid + ";" + this.src + ";" +  this.dst+ ";" + this.dcontext+ ";" + this.channel + ";" + this.srcchannel + ";" + this.dstchannel
+                + ";" + this.action+ ";" + this.where + ";" + this.start+ ";" + this.answer+ ";" + this.end + ";" + this.duration
+                + ";" + this.billsec + ";" + this.status + ";" + this.accountcode + ";" + this.uniqueid + ";" + this.userfield;
+
+    }
+
+    public String outgoingProvider(){
+        if (this.where.contains("Dongle") && this.where.contains("VDF") ||
+                this.where.contains("Dongle") && this.where.contains("Vodafone") ||
+                this.where.contains("Dongle") && this.where.contains("MTS"))
+            return "MTS";
+
+        else if (this.where.contains("Dongle") && this.where.contains("KS") ||
+                this.where.contains("Dongle") && this.where.contains("KYIVSTAR"))
+            return "KS";
+
+        else if (this.where.contains("Dongle") && this.where.contains("LIFE"))
+            return "Life";
+
+        else if (this.where.contains("SIP/intertelecom"))
+            return "Intertelecom";
+
+        else
+            return "dafaq";
+    }
 }
