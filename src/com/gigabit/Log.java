@@ -205,16 +205,13 @@ public class Log {
     }
 
     public String outgoingProvider(){
-        if (this.where.contains("Dongle") && this.where.contains("VDF") ||
-                this.where.contains("Dongle") && this.where.contains("Vodafone") ||
-                this.where.contains("Dongle") && this.where.contains("MTS"))
+        if (this.where.contains("VDF") || this.where.contains("Vodafone") || this.where.contains("MTS"))
             return "MTS";
 
-        else if (this.where.contains("Dongle") && this.where.contains("KS") ||
-                this.where.contains("Dongle") && this.where.contains("KYIVSTAR"))
+        else if (this.where.contains("KS") || this.where.contains("KYIVSTAR"))
             return "KS";
 
-        else if (this.where.contains("Dongle") && this.where.contains("LIFE"))
+        else if (this.where.contains("LIFE"))
             return "Life";
 
         else if (this.where.contains("SIP/intertelecom"))
